@@ -84,7 +84,7 @@ public class Serviz {
             		results=socketIn.nextLine();
             		parts=socketIn.nextLine();
             		price=socketIn.nextLine();
-            		try { //вкарване на данни в component
+            		try { //add info to kr.component table on the MySQL server
             	    	PreparedStatement preparedStatement;
             	    	preparedStatement = link.prepareStatement("INSERT INTO component(type, make, model) VALUES (?, ?, ?)");
             	    	preparedStatement.setString(1, type);
@@ -93,7 +93,7 @@ public class Serviz {
             	    	preparedStatement.executeUpdate();}
             	      catch(SQLException e){
             	        e.printStackTrace();}
-            		 try { //вкарване на данни в service
+            		 try { //add info to kr.service table on the MySQL server
                 	    	PreparedStatement preparedStatement2;
                 	    	preparedStatement2 = link.prepareStatement("INSERT INTO service(component_id, status, results, parts, price) VALUES (?, ?, ?, ?, ?)");
                 	    	preparedStatement2.setString(1, component_id);
@@ -109,7 +109,7 @@ public class Serviz {
               break; }
             
             case "view": {
-                try{ //вадене на данни
+                try{ //view all info from the two tables from the MySQL Server DB
                     stmt = link.createStatement();
                     resultSet = stmt.executeQuery("SELECT a.id, a.type, a.make, a.model, b.status, b.results, b.parts, b.price FROM component as a, service as b where a.id=b.id");
                     while (resultSet.next()) {
@@ -136,7 +136,7 @@ public class Serviz {
         		results=socketIn.nextLine();
         		parts=socketIn.nextLine();
         		price=socketIn.nextLine();
-        		try { //вкарване на данни в component
+        		try { //update info in kr.component table on the MySQL server
         	    	PreparedStatement preparedStatement;
         	    	preparedStatement = link.prepareStatement("UPDATE component set type=?, make=?, model=?  WHERE id=?");
         	    	preparedStatement.setString(1, type);
@@ -146,7 +146,7 @@ public class Serviz {
         	    	preparedStatement.executeUpdate();}
         	      catch(SQLException e){
         	        e.printStackTrace();}
-        		 try { //вкарване на данни в service
+        		 try { //update info in kr.service table on the MySQL server
             	    	PreparedStatement preparedStatement2;
             	    	preparedStatement2 = link.prepareStatement("UPDATE service set component_id=?, status=?, results=?, parts=?, price=?  WHERE component_id=?");
             	    	preparedStatement2.setString(1, component_id);
