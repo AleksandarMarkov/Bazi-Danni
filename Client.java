@@ -157,5 +157,4 @@ public class Client {
 	         if(connection!=null) connection.close();
 	         if(keyboardIn!=null) keyboardIn.close(); }
 	       catch(IOException e){
-	         System.err.println("Cannot close socket!"); } } }
-}
+	         System.err.println("Cannot close socket!"); } } } }
