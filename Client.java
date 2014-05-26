@@ -19,12 +19,10 @@ public class Client {
 	     try{
 	       System.out.println("Connecting to server...");
 	       try{
-	         connection = new Socket(host, port);
-	       }
+	         connection = new Socket(host, port); }
 	       catch(ConnectException e){
 	         System.err.println("Server connection failed.");
-	         return;
-	       }
+	         return; }
 	       System.out.println("Server connection successful!");
 
 	       socketIn = new Scanner(new BufferedReader(new InputStreamReader(connection.getInputStream())));
@@ -49,8 +47,6 @@ public class Client {
 	         System.out.print("Enter a command: ");
 	         command = keyboardIn.nextLine();
 	         socketOut.println(command.toLowerCase());
-	         
-	         
 	         
 	         switch(command){
 	        
@@ -95,8 +91,7 @@ public class Client {
 	         case "view": {
 	        	 while(!"####".equals(sss)) {
 	        		sss=socketIn.nextLine();
-	        		System.out.println(sss);
-	        	 } 
+	        		System.out.println(sss); } 
 	         break;}
 	         
 	         case "update": {
@@ -148,32 +143,19 @@ public class Client {
 	         
 	         default:
 	        	 System.out.println(socketIn.nextLine());
-	        	 break;
-	         }
+	        	 break; } }
 	        	 
-	         	
-	       
-	       
-	       
-	       
-	       }
 	       while (!command.equalsIgnoreCase("exit"));
-	       System.out.println("Closing connection...");
-
-	     }
+	       System.out.println("Closing connection..."); }
+	       
 	     catch(IOException e) {
-	       e.printStackTrace();
-	     }
+	       e.printStackTrace(); }
 	     finally{
 	       try{
 	         if(socketIn!=null) socketIn.close();
 	         if(socketOut!=null) socketOut.close();
 	         if(connection!=null) connection.close();
-	         if(keyboardIn!=null) keyboardIn.close();
-	       }
+	         if(keyboardIn!=null) keyboardIn.close(); }
 	       catch(IOException e){
-	         System.err.println("Cannot close socket!");
-	       }
-	     }
-	   }
+	         System.err.println("Cannot close socket!"); } } }
 }
