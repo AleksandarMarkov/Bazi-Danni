@@ -1,0 +1,42 @@
+CREATE DATABASE kr;
+USE kr;
+CREATE TABLE component (
+		ID INT NOT NULL AUTO_INCREMENT,
+		Type varchar(64) not null,
+		Make varchar(255) not null,
+		Model varchar(255) not null,
+		PRIMARY KEY (ID) 
+	) ENGINE=INNODB;
+
+
+CREATE TABLE service (
+		ID INT NOT NULL auto_increment,
+		component_id int not null,
+		Status varchar(32) not null,
+		Results text null,
+		Parts text null,
+		Price double(6,2) null,
+		Primary key (ID),
+		FOREIGN KEY (component_id) REFERENCES component(ID)
+                ON DELETE CASCADE ON UPDATE CASCADE
+	) ENGINE=INNODB;
+
+insert into component (type, make, model)
+values 	("Power Supply", "Power Box", "BS 650W"),
+	("GPU", "Nvidia", "GTX260"),
+	("LAN Card", "Tenda", "W54GL"),
+	("Motherboard", "Gigabyte", "G9884NVP"),
+	("GPU", "ATI", "Raidon9500HD"),
+	("HDD", "Seagate", "ST10007200TP");
+
+insert into service (component_id, status, results, parts, price)
+values 	(1, "Done", "Bad Transformer", "Transformer", 16.50),
+	(2, "Processing", "Deffective Fan", "Fan", 30),
+	(3, "Processing", "Deffective RJ-45", "RJ-45 Connector", 10.98),
+	(4, "Done","Loose North Bridge","North Bridge Rebowling", 75.64),
+	(5, "Done", "Bad VRAM, not fixed", "", 0),
+	(6, "Processing", "Bad Sectors", "New HDD", 130.55);
+
+GRANT ALL ON kr.* TO 'admin'@'localhost'IDENTIFIED BY 'admin';
+FLUSH PRIVILEGES;
+
